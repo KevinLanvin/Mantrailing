@@ -1,0 +1,88 @@
+{
+  "wind": {
+    "front": {
+      "0": 0,
+      "50": 5,
+      "70": 10,
+      "100": 15
+    },
+    "side": {
+      "0": 0,
+      "50": 5,
+      "70": 8,
+      "100": 10
+    },
+    "back": {
+      "0": 0,
+      "50": 8,
+      "70": 15,
+      "100": 20
+    }
+  },
+  "temperature": {
+    "0": 10,
+    "10": 5,
+    "15": 0,
+    "20": 7,
+    "30": 10
+  },
+  "moisture": {
+    "moist": 0,
+    "dry": 5,
+    "warm": 10
+  },
+  "distance": {
+    "20": {
+      "value": 0,
+      "malus": {
+        "beginner": 5
+      }
+    },
+    "100": {
+      "value": 0,
+      "malus": {
+        "beginner": 10
+      }
+    },
+    "200": {
+      "value": 0,
+      "malus": {
+        "beginner": 15,
+        "intermediate": 5
+      }
+    },
+    "500": {
+      "value": 0,
+      "malus": {
+        "beginner": 50,
+        "intermediate": 10
+      }
+    },
+    "1000": {
+      "value": 5,
+      "malus": {
+        "beginner": 95,
+        "intermediate": 10
+      }
+    },
+    "1500": {
+      "value": 10,
+      "malus": {
+        "beginner": 190,
+        "intermediate": 10
+      }
+    }
+  },
+  "terrain": {
+    "grass": 0,
+    "bitumen": 10,
+    "path": 5,
+    "parking": 12,
+    "cityCenter": 15,
+    "industrialZone": 15,
+    "bridge": 8,
+    "sand": 10
+  },
+  "turns": [0, 2, 4, 8, 12, 18, 25],
+  "wrongTracks": [0,5,10,15,20]
+}

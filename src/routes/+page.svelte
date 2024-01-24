@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Score from '../components/Score.svelte';
+	import TemperaturePicker from '../components/TemperaturePicker.svelte';
+	import WindDirectionPicker from '../components/WindDirectionPicker.svelte';
+	import WindForcePicker from '../components/WindForcePicker.svelte';
+</script>
+
+<WindDirectionPicker />
+<WindForcePicker />
+<TemperaturePicker />
+<Score />
