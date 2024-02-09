@@ -2,4 +2,5 @@
   import { score } from "../store"
 </script>
 
-<h2>{$score}</h2>
+<h2>Difficulté de la trace : {$score}</h2>
+<hr>

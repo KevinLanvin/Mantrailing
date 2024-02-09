@@ -9,3 +9,14 @@ export const getTemperatureScore = ($data, $options) => {
 	);
 	return $data?.temperature?.[temperature] ?? 0;
 };
+
+export const getMoistureScore = ($data, $options) => {
+	return $data?.moisture?.[$options.moisture] ?? 0;
+};
+
+export const getDistanceScore = ($data, $options) => {
+	const distance =
+		[20, 100, 200, 500, 1000, 1500].find((distance) => $options.distance <= distance) || 1500;
+	console.log($options.distance, distance);
+	return $data?.distance?.[distance]?.value ?? 0;
+};
