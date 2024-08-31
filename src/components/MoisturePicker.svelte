@@ -1,24 +1,25 @@
 <script>
-	import { options } from '../store';
-	import { onMount } from 'svelte';
+	import { MoistureLevel } from '../domain/entities/ScoreScale'
+	import { trackConfig } from '../store'
+	import { onMount } from 'svelte'
 
 	onMount(() =>
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
-				moisture: 'wet'
-			};
+				moisture: MoistureLevel.MOIST
+			}
 		})
-	);
+	)
 	// @ts-ignore
 	const handleMoistureChange = (event) => {
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				moisture: event.target.value
-			};
-		});
-	};
+			}
+		})
+	}
 </script>
 
 <div class="moisturePicker">

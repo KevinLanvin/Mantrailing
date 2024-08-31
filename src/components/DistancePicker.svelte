@@ -1,24 +1,24 @@
 <script>
-	import { options } from '../store';
-	import { onMount } from 'svelte';
+	import { onMount } from 'svelte'
+	import { trackConfig } from '../store'
 
 	onMount(() =>
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				distance: 20
-			};
+			}
 		})
-	);
+	)
 	// @ts-ignore
 	const handleDistanceChange = (event) => {
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				distance: event.target.value
-			};
-		});
-	};
+			}
+		})
+	}
 </script>
 
 <div class="distancePicker">

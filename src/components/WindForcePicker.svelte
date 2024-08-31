@@ -1,24 +1,24 @@
 <script>
-	import { options } from '../store';
-	import { onMount } from 'svelte';
+	import { onMount } from 'svelte'
+	import { trackConfig } from '../store'
 
 	onMount(() =>
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				windForce: 0
-			};
+			}
 		})
-	);
+	)
 	// @ts-ignore
 	const handleWindForceChange = (event) => {
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				windForce: event.target.value
-			};
-		});
-	};
+			}
+		})
+	}
 </script>
 
 <div class="windForcePicker">

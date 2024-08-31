@@ -1,24 +1,24 @@
 <script>
-	import { options } from '../store';
-	import { onMount } from 'svelte';
+	import { trackConfig } from '../store'
+	import { onMount } from 'svelte'
 
 	onMount(() =>
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				temperature: 15
-			};
+			}
 		})
-	);
+	)
 	// @ts-ignore
 	const handleTemperatureChange = (event) => {
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				temperature: event.target.value
-			};
-		});
-	};
+			}
+		})
+	}
 </script>
 
 <div class="temperaturePicker">

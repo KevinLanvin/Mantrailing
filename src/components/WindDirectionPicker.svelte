@@ -1,24 +1,25 @@
 <script>
-	import { options } from '../store';
-	import { onMount } from 'svelte';
+	import { WindDirection } from '../domain/entities/ScoreScale'
+	import { trackConfig } from '../store'
+	import { onMount } from 'svelte'
 
 	onMount(() =>
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
-				wind: 'front'
-			};
+				windDirection: WindDirection.FRONT
+			}
 		})
-	);
+	)
 	// @ts-ignore
 	const handleWindDirectionChange = (event) => {
-		options.update((state) => {
+		trackConfig.update((state) => {
 			return {
 				...state,
 				wind: event.target.value
-			};
-		});
-	};
+			}
+		})
+	}
 </script>
 
 <div class="windDirectionPicker">
