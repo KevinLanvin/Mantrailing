@@ -1,6 +1,6 @@
 <script>
 	import { MoistureLevel } from '../domain/entities/ScoreScale'
-	import { trackConfig } from '../store'
+	import { trackConfig } from '../stores/scoreStore'
 	import { onMount } from 'svelte'
 
 	onMount(() =>

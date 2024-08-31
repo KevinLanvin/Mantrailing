@@ -1,5 +1,5 @@
 <script>
-	import { trackConfig } from '../store'
+	import { trackConfig } from '../stores/scoreStore'
 	import { onMount } from 'svelte'
 
 	onMount(() =>

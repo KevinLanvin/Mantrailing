@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte'
-	import { trackConfig } from '../store'
+	import { trackConfig } from '../stores/scoreStore'
 
 	onMount(() =>
 		trackConfig.update((state) => {
