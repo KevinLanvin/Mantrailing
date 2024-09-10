@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte'
 	import DistancePicker from '../components/DistancePicker.svelte'
 	import Geoloc from '../components/Geoloc.svelte'
 	import Map from '../components/Map.svelte'
@@ -7,13 +8,22 @@
 	import TemperaturePicker from '../components/TemperaturePicker.svelte'
 	import WindDirectionPicker from '../components/WindDirectionPicker.svelte'
 	import WindForcePicker from '../components/WindForcePicker.svelte'
+	import { currentCoordinates, path } from '../stores/pathStore'
+	import fakePath from '../track.json'
+
+	onMount(() => {
+		setTimeout(() => {
+			path.set(fakePath)
+			currentCoordinates.set(fakePath[fakePath.length - 1])
+		}, 2000)
+	})
 </script>
 
 <Map />
-<Geoloc />
+<!-- <Geoloc /> -->
 <Score />
-<WindDirectionPicker />
+<!-- <WindDirectionPicker />
 <WindForcePicker />
 <TemperaturePicker />
 <MoisturePicker />
-<DistancePicker />
+<DistancePicker /> -->

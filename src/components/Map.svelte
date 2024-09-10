@@ -1,25 +1,28 @@
 <script lang="ts">
 	import L, { type LatLngTuple } from 'leaflet'
-	import { currentCoordinates, path } from '../stores/pathStore'
-	import type { Coordinate, Path } from '../domain/entities/Path'
+	import { currentCoordinates, path, turns } from '../stores/pathStore'
+	import type { AccurateCoordinate, Path, Turn } from '../domain/entities/Path'
 	import { watch } from '../stores/watch'
 	import 'leaflet/dist/leaflet.css'
 
 	let map: L.Map
 	let circle: L.Circle
 	let lineLayers: L.Polyline
+	let markerLayer: L.LayerGroup
 
 	const initialView: LatLngTuple = [$currentCoordinates.latitude, $currentCoordinates.longitude]
 
 	const createMap = (container: string | HTMLElement) => {
 		let m = L.map(container, { preferCanvas: true }).setView(initialView, 16)
-		L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-			maxZoom: 20,
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
 			attribution:
-				'&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(m)
 		circle = L.circle(initialView, { radius: $currentCoordinates.accuracy })
 		circle.addTo(m)
+		markerLayer = L.layerGroup([])
+		markerLayer.addTo(m)
 		return m
 	}
 	const getLineFromPath = ($path: Path): LatLngTuple[] => {
@@ -48,7 +51,7 @@
 		}
 	}
 
-	watch(currentCoordinates, ($currentCoordinates: Coordinate) => {
+	watch(currentCoordinates, ($currentCoordinates: AccurateCoordinate) => {
 		if (map) {
 			const latlng: L.LatLngTuple = [$currentCoordinates.latitude, $currentCoordinates.longitude]
 			circle.setLatLng(latlng)
@@ -62,6 +65,17 @@
 			lineLayers.setLatLngs(getLineFromPath($path))
 		}
 	})
+
+	watch(turns, ($turns: Turn[]) => {
+		if (map) {
+			markerLayer.clearLayers()
+			for (const turn of $turns) {
+				markerLayer.addLayer(
+					new L.Marker([turn.latitude, turn.longitude]).bindPopup(`${Math.round(turn.angle)}°`)
+				)
+			}
+		}
+	})
 </script>
 
 <svelte:window on:resize={resizeMap} />
@@ -70,8 +84,12 @@
 
 <style lang="scss">
 	.map {
-		width: 300px;
-		height: 300px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -1;
 		:global(.leaflet-map-pane) {
 			overflow: visible;
 		}
