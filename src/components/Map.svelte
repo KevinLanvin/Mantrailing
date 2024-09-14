@@ -1,6 +1,6 @@
 <script lang="ts">
 	import L, { type LatLngTuple } from 'leaflet'
-	import { currentCoordinates, path, turns } from '../stores/pathStore'
+	import { currentCoordinates, path, allTurns } from '../stores/pathStore'
 	import type { AccurateCoordinate, Path, Turn } from '../domain/entities/Path'
 	import { watch } from '../stores/watch'
 	import 'leaflet/dist/leaflet.css'
@@ -52,7 +52,7 @@
 	}
 
 	watch(currentCoordinates, ($currentCoordinates: AccurateCoordinate) => {
-		if (map) {
+		if (map && $currentCoordinates) {
 			const latlng: L.LatLngTuple = [$currentCoordinates.latitude, $currentCoordinates.longitude]
 			circle.setLatLng(latlng)
 			circle.setRadius($currentCoordinates.accuracy)
@@ -66,7 +66,7 @@
 		}
 	})
 
-	watch(turns, ($turns: Turn[]) => {
+	watch(allTurns, ($turns: Turn[]) => {
 		if (map) {
 			markerLayer.clearLayers()
 			for (const turn of $turns) {

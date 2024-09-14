@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte'
-	import DistancePicker from '../components/DistancePicker.svelte'
 	import Geoloc from '../components/Geoloc.svelte'
 	import Map from '../components/Map.svelte'
 	import MoisturePicker from '../components/MoisturePicker.svelte'

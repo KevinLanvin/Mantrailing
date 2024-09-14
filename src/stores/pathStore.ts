@@ -1,6 +1,7 @@
 import type { AccurateCoordinate, Path } from '../domain/entities/Path'
 import { derived, writable } from 'svelte/store'
 
+import { getTotalDistance } from '../domain/usecases/getTotalDistance'
 import { getTurns } from '../domain/usecases/getTurns'
 
 export const path = writable<Path>([])
@@ -11,6 +12,10 @@ export const currentCoordinates = writable<AccurateCoordinate>({
 	accuracy: 0
 })
 
-export const turns = derived(path, ($path) => {
+export const allTurns = derived(path, ($path) => {
 	return getTurns($path)
+})
+
+export const distance = derived(path, ($path) => {
+	return getTotalDistance([...$path])
 })
