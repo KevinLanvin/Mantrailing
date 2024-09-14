@@ -8,18 +8,14 @@ export const getTotalDistance = (path: Path, totalDistance = 0): number => {
 	return getTotalDistance(
 		path,
 		totalDistance +
-			// Get two decimals
-			Math.round(
-				(getDistanceFromLatLon(
+			Math.floor(
+				getDistanceFromLatLon(
 					lastPoint.latitude,
 					lastPoint.longitude,
 					path[path.length - 1].latitude,
 					path[path.length - 1].longitude
-				) +
-					Number.EPSILON) *
-					100
-			) /
-				100
+				)
+			)
 	)
 }
 

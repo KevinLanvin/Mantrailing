@@ -47,5 +47,5 @@
 	{ "latitude": 50.994546780926754, "longitude": 2.407457930082046, "accuracy": 0 },
 	{ "latitude": 50.99466002665159, "longitude": 2.4075155071418237, "accuracy": 0 },
 	{ "latitude": 50.99486386825967, "longitude": 2.4075766827679104, "accuracy": 0 },
-	{ "latitude": 50.99501788132494, "longitude": 2.4076306612603275, "accuracy": 0 }
+	{ "latitude": 50.99501788132494, "longitude": 2.4076306612603275, "accuracy": 2 }
 ]
