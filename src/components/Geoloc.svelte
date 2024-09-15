@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte'
-	import { currentCoordinates, path } from '../stores/pathStore'
+	import { currentCoordinates, deletedTurns, path } from '../stores/pathStore'
 
 	let watcher: number
 	let tracking = false
@@ -8,6 +8,7 @@
 	const handleTrackingEvent = () => {
 		tracking = !tracking
 		if (tracking) {
+			deletedTurns.set([])
 			path.set([$currentCoordinates])
 		}
 	}

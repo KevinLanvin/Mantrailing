@@ -1,4 +1,4 @@
-import type { AccurateCoordinate, Path } from '../domain/entities/Path'
+import type { AccurateCoordinate, Path, Turn } from '../domain/entities/Path'
 import { derived, writable } from 'svelte/store'
 
 import { getTotalDistance } from '../domain/usecases/getTotalDistance'
@@ -14,6 +14,18 @@ export const currentCoordinates = writable<AccurateCoordinate>({
 
 export const allTurns = derived(path, ($path) => {
 	return getTurns($path)
+})
+
+export const deletedTurns = writable<Turn[]>([])
+
+export const validTurns = derived([allTurns, deletedTurns], ([$allTurns, $deletedTurns]) => {
+	return $allTurns.filter(
+		(turn) =>
+			!$deletedTurns.some(
+				(deletedTurn) =>
+					deletedTurn.latitude === turn.latitude && deletedTurn.longitude === turn.longitude
+			)
+	)
 })
 
 export const distance = derived(path, ($path) => {
