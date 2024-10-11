@@ -1,0 +1,54 @@
+{
+	"wind": {
+		"front": {
+			"0": 0,
+			"50": 5,
+			"70": 10,
+			"100": 15
+		},
+		"side": {
+			"0": 0,
+			"50": 5,
+			"70": 8,
+			"100": 10
+		},
+		"back": {
+			"0": 0,
+			"50": 8,
+			"70": 15,
+			"100": 20
+		}
+	},
+	"temperature": {
+		"0": 10,
+		"10": 5,
+		"15": 0,
+		"20": 7,
+		"30": 10
+	},
+	"moisture": {
+		"moist": 0,
+		"dry": 5,
+		"warm": 10
+	},
+	"distance": {
+		"threshold": {
+			"beginner": 50,
+			"intermediate": 150,
+			"pro": 300
+		},
+		"multiplier": 0.05
+	},
+	"terrain": {
+		"grass": 0,
+		"bitumen": 10,
+		"path": 5,
+		"parking": 12,
+		"cityCenter": 15,
+		"industrialZone": 15,
+		"bridge": 8,
+		"sand": 10
+	},
+	"turns": 4,
+	"wrongTracks": [0, 5, 10, 15, 20]
+}
