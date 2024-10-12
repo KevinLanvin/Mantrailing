@@ -1,3 +1,7 @@
+import {
+	FriendshipInvitationCreation,
+	friendshipInvitationsTable,
+} from './../../database/schemas/friendInvitations'
 import { User, UserCreation, usersTable } from '../../database/schemas/users'
 import { and, count, eq, or } from 'drizzle-orm'
 
@@ -6,6 +10,17 @@ import { NeonHttpDatabase } from 'drizzle-orm/neon-http'
 export type GetOptions = {
 	populate: {
 		civilizations: boolean
+	}
+}
+
+export class FriendshipInvitationsTable {
+	constructor(private readonly client: NeonHttpDatabase) {}
+
+	async create(friendshipInvitation: FriendshipInvitationCreation) {
+		return await this.client
+			.insert(friendshipInvitationsTable)
+			.values(friendshipInvitation)
+			.returning()
 	}
 }
 

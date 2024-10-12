@@ -1,18 +1,20 @@
 import Elysia, { t } from 'elysia'
+import { FriendshipInvitationsTable, UsersTable } from './database'
 
-import { UsersTable } from './database'
 import { addFriend } from './addFriend'
 import { authorization } from '../../libs/handlers/authorization'
 import { createUser } from './createUser'
 import { db } from '../../libs/database'
 import { deleteFriend } from './deleteFriend'
 import { logger } from '@bogeychan/elysia-logger'
+import { sendFriendInvitation } from './sendFriendInvitation'
 
 export const usersModule = new Elysia({ prefix: '/users' })
 	.use(logger())
 	// .use(emailSender)
 	.decorate({
 		userDbClient: new UsersTable(db),
+		friendshipInvitationDbClient: new FriendshipInvitationsTable(db),
 	})
 	.get('', async ({ userDbClient }) => {
 		return userDbClient.getAll()
@@ -66,6 +68,25 @@ export const usersModule = new Elysia({ prefix: '/users' })
 	)
 	.post(
 		'/friend',
+		({
+			user,
+			userDbClient,
+			friendshipInvitationDbClient,
+			body: { friendId },
+		}) => {
+			return sendFriendInvitation(
+				{ userDbClient, friendshipInvitationDbClient },
+				{ sender: user.id as string, invited: friendId },
+			)
+		},
+		{
+			body: t.Object({
+				friendId: t.String(),
+			}),
+		},
+	)
+	.post(
+		'/friend/confirm',
 		({ user, userDbClient, body: { friendId } }) => {
 			return addFriend(
 				{ userDbClient },
