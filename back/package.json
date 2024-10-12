@@ -8,6 +8,7 @@
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.1.2",
     "@elysiajs/bearer": "^1.1.2",
+    "@elysiajs/cors": "^1.1.1",
     "@elysiajs/jwt": "^1.1.1",
     "@elysiajs/swagger": "^1.1.1",
     "@neondatabase/serverless": "^0.9.5",
