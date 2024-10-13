@@ -1,4 +1,11 @@
-import { FriendshipInvitationsTable, UsersTable } from './database'
+import {
+	CannotInviteYourselfError,
+	InvitationAlreadyExists,
+} from '../../errors/errors'
+
+import { CannotFindUser } from './../../errors/errors'
+import { FriendshipInvitationsTable } from './friendshipDatabase'
+import { UsersTable } from './database'
 
 export const sendFriendInvitation = async (
 	{
@@ -10,15 +17,20 @@ export const sendFriendInvitation = async (
 	},
 	{ sender, invited }: { sender: string; invited: string },
 ) => {
-	try {
-		const invitedUser = await userDbClient.getById(invited)
-		if (!invitedUser) {
-			throw new Error(`Cannot find user with id ${invited}`)
-		}
-		return await friendshipInvitationDbClient.create({ sender, invited })
-	} catch (error) {
-		throw new Error(
-			`Error while sending friend invitation from ${sender} to user ${invited}. Cause: ${error}.`,
-		)
+	const invitedUser =
+		(await userDbClient.getById(invited)) ??
+		(await userDbClient.getByUsername(invited))
+	if (!invitedUser) {
+		throw new CannotFindUser(invited)
 	}
+	if (sender === invitedUser.id) {
+		throw new CannotInviteYourselfError(sender)
+	}
+	if (await friendshipInvitationDbClient.exists(sender, invitedUser.id)) {
+		throw new InvitationAlreadyExists(sender, invitedUser.id)
+	}
+	return await friendshipInvitationDbClient.create({
+		sender,
+		invited: invitedUser.id,
+	})
 }

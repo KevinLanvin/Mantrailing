@@ -17,7 +17,17 @@
 				})
 		}
 
+		// Retrieve from local storage
 		const currentPage = window.location.pathname
+		const localStorageUser = localStorage.getItem('user')
+		const localStorageToken = localStorage.getItem('token')
+		if (!$user && localStorageUser) {
+			user.set(JSON.parse(localStorageUser))
+		}
+		if (!$token && localStorageToken) {
+			token.set(localStorageToken)
+		}
+
 		if (!publicRoutes.includes(currentPage) && !$user) {
 			if (!$token) {
 				goto('/login')

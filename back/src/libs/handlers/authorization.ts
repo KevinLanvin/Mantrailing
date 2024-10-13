@@ -1,5 +1,4 @@
 import Elysia from 'elysia'
-import { User } from '../../database/schemas/users'
 import { bearer } from '@elysiajs/bearer'
 import { jwtMiddleware } from './jwt'
 

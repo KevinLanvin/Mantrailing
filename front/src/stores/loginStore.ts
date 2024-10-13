@@ -3,4 +3,4 @@ import { writable } from 'svelte/store'
 
 export const token = writable<string>()
 
-export const user = writable<AuthenticatedUser>()
+export const user = writable<AuthenticatedUser | null>()

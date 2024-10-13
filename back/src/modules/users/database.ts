@@ -1,35 +1,13 @@
-import {
-	FriendshipInvitationCreation,
-	friendshipInvitationsTable,
-} from './../../database/schemas/friendInvitations'
 import { User, UserCreation, usersTable } from '../../database/schemas/users'
 import { and, count, eq, or } from 'drizzle-orm'
 
 import { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-
-export type GetOptions = {
-	populate: {
-		civilizations: boolean
-	}
-}
-
-export class FriendshipInvitationsTable {
-	constructor(private readonly client: NeonHttpDatabase) {}
-
-	async create(friendshipInvitation: FriendshipInvitationCreation) {
-		return await this.client
-			.insert(friendshipInvitationsTable)
-			.values(friendshipInvitation)
-			.returning()
-	}
-}
 
 export class UsersTable {
 	constructor(private readonly client: NeonHttpDatabase) {}
 
 	async getAll(): Promise<User[]> {
 		const users = await this.client.select().from(usersTable)
-
 		return users
 	}
 
@@ -87,6 +65,21 @@ export class UsersTable {
 			})
 			.from(usersTable)
 			.where(eq(usersTable.id, id))
+
+		return user
+	}
+
+	async getByUsername(username: string): Promise<User | null> {
+		const [user] = await this.client
+			.select({
+				id: usersTable.id,
+				username: usersTable.username,
+				email: usersTable.email,
+				authorizationKey: usersTable.authorizationKey,
+				friends: usersTable.friends,
+			})
+			.from(usersTable)
+			.where(eq(usersTable.username, username))
 
 		return user
 	}

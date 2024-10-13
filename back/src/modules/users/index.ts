@@ -1,11 +1,14 @@
 import Elysia, { t } from 'elysia'
-import { FriendshipInvitationsTable, UsersTable } from './database'
 
-import { addFriend } from './addFriend'
+import { FriendshipInvitationsTable } from './friendshipDatabase'
+import { UsersTable } from './database'
 import { authorization } from '../../libs/handlers/authorization'
+import { confirmInvitation } from './confirmInvitation'
 import { createUser } from './createUser'
 import { db } from '../../libs/database'
 import { deleteFriend } from './deleteFriend'
+import { getReceivedInvitations } from './getReceivedInvitations'
+import { getSentInvitations } from './getSentInvitations'
 import { logger } from '@bogeychan/elysia-logger'
 import { sendFriendInvitation } from './sendFriendInvitation'
 
@@ -87,9 +90,14 @@ export const usersModule = new Elysia({ prefix: '/users' })
 	)
 	.post(
 		'/friend/confirm',
-		({ user, userDbClient, body: { friendId } }) => {
-			return addFriend(
-				{ userDbClient },
+		({
+			user,
+			userDbClient,
+			friendshipInvitationDbClient,
+			body: { friendId },
+		}) => {
+			return confirmInvitation(
+				{ userDbClient, friendshipInvitationDbClient },
 				{ userId: user.id as string, friendId },
 			)
 		},
@@ -111,5 +119,20 @@ export const usersModule = new Elysia({ prefix: '/users' })
 			body: t.Object({
 				friendId: t.String(),
 			}),
+		},
+	)
+	.get('/friends/sentInvitations', ({ user, friendshipInvitationDbClient }) => {
+		return getSentInvitations(
+			{ friendshipInvitationDbClient },
+			{ userId: user.id as string },
+		)
+	})
+	.get(
+		'/friends/receivedInvitations',
+		({ user, friendshipInvitationDbClient }) => {
+			return getReceivedInvitations(
+				{ friendshipInvitationDbClient },
+				{ userId: user.id as string },
+			)
 		},
 	)
