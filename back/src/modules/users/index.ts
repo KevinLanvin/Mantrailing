@@ -1,23 +1,18 @@
 import Elysia, { t } from 'elysia'
 
-import { FriendshipInvitationsTable } from './friendshipDatabase'
+import { FriendshipsTable } from '../friends/database'
 import { UsersTable } from './database'
 import { authorization } from '../../libs/handlers/authorization'
-import { confirmInvitation } from './confirmInvitation'
 import { createUser } from './createUser'
 import { db } from '../../libs/database'
-import { deleteFriend } from './deleteFriend'
-import { getReceivedInvitations } from './getReceivedInvitations'
-import { getSentInvitations } from './getSentInvitations'
 import { logger } from '@bogeychan/elysia-logger'
-import { sendFriendInvitation } from './sendFriendInvitation'
 
 export const usersModule = new Elysia({ prefix: '/users' })
 	.use(logger())
 	// .use(emailSender)
 	.decorate({
 		userDbClient: new UsersTable(db),
-		friendshipInvitationDbClient: new FriendshipInvitationsTable(db),
+		friendshipDbClient: new FriendshipsTable(db),
 	})
 	.get('', async ({ userDbClient }) => {
 		return userDbClient.getAll()
@@ -67,72 +62,5 @@ export const usersModule = new Elysia({ prefix: '/users' })
 				oldPassword: t.String(),
 				newPassword: t.String(),
 			}),
-		},
-	)
-	.post(
-		'/friend',
-		({
-			user,
-			userDbClient,
-			friendshipInvitationDbClient,
-			body: { friendId },
-		}) => {
-			return sendFriendInvitation(
-				{ userDbClient, friendshipInvitationDbClient },
-				{ sender: user.id as string, invited: friendId },
-			)
-		},
-		{
-			body: t.Object({
-				friendId: t.String(),
-			}),
-		},
-	)
-	.post(
-		'/friend/confirm',
-		({
-			user,
-			userDbClient,
-			friendshipInvitationDbClient,
-			body: { friendId },
-		}) => {
-			return confirmInvitation(
-				{ userDbClient, friendshipInvitationDbClient },
-				{ userId: user.id as string, friendId },
-			)
-		},
-		{
-			body: t.Object({
-				friendId: t.String(),
-			}),
-		},
-	)
-	.delete(
-		'/friend',
-		({ user, userDbClient, body: { friendId } }) => {
-			return deleteFriend(
-				{ userDbClient },
-				{ userId: user.id as string, friendId },
-			)
-		},
-		{
-			body: t.Object({
-				friendId: t.String(),
-			}),
-		},
-	)
-	.get('/friends/sentInvitations', ({ user, friendshipInvitationDbClient }) => {
-		return getSentInvitations(
-			{ friendshipInvitationDbClient },
-			{ userId: user.id as string },
-		)
-	})
-	.get(
-		'/friends/receivedInvitations',
-		({ user, friendshipInvitationDbClient }) => {
-			return getReceivedInvitations(
-				{ friendshipInvitationDbClient },
-				{ userId: user.id as string },
-			)
 		},
 	)

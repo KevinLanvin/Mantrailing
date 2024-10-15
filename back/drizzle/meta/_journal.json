@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1727294281792,
-      "tag": "0000_tough_bullseye",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1727652845066,
-      "tag": "0001_smiling_sir_ram",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1728727679587,
-      "tag": "0002_clear_deathstrike",
+      "when": 1729031238274,
+      "tag": "0000_cute_devos",
       "breakpoints": true
     }
   ]

@@ -61,7 +61,6 @@ export class UsersTable {
 				username: usersTable.username,
 				email: usersTable.email,
 				authorizationKey: usersTable.authorizationKey,
-				friends: usersTable.friends,
 			})
 			.from(usersTable)
 			.where(eq(usersTable.id, id))
@@ -76,7 +75,6 @@ export class UsersTable {
 				username: usersTable.username,
 				email: usersTable.email,
 				authorizationKey: usersTable.authorizationKey,
-				friends: usersTable.friends,
 			})
 			.from(usersTable)
 			.where(eq(usersTable.username, username))
@@ -91,7 +89,6 @@ export class UsersTable {
 				username: usersTable.username,
 				email: usersTable.email,
 				authorizationKey: usersTable.authorizationKey,
-				friends: usersTable.friends,
 			})
 			.from(usersTable)
 			.where(eq(usersTable.email, email))
@@ -219,37 +216,5 @@ export class UsersTable {
 			.where(eq(usersTable.id, userId))
 
 		await this.addAuthorizationKey(userId)
-	}
-
-	async addFriend(userId: string, friendId: string) {
-		const [{ friends }] = await this.client
-			.select({ friends: usersTable.friends })
-			.from(usersTable)
-			.where(eq(usersTable.id, userId))
-		const friendIndex = friends.indexOf(friendId)
-		if (friendIndex !== -1) {
-			throw new Error('Users are already friends')
-		}
-		friends.push(friendId)
-		await this.client
-			.update(usersTable)
-			.set({ friends })
-			.where(eq(usersTable.id, userId))
-	}
-
-	async deleteFriend(userId: string, friendId: string) {
-		const [{ friends }] = await this.client
-			.select({ friends: usersTable.friends })
-			.from(usersTable)
-			.where(eq(usersTable.id, userId))
-		const friendIndex = friends.indexOf(friendId)
-		if (friendIndex === -1) {
-			throw new Error('Friend index not found')
-		}
-		friends.splice(friendIndex, 1)
-		await this.client
-			.update(usersTable)
-			.set({ friends })
-			.where(eq(usersTable.id, userId))
 	}
 }

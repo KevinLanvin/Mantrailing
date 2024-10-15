@@ -2,6 +2,7 @@ import { Elysia } from 'elysia'
 import { authModule } from './modules/auth'
 import cors from '@elysiajs/cors'
 import { errorModule } from './modules/error'
+import { friendsModule } from './modules/friends'
 import { jwtMiddleware } from './libs/handlers/jwt'
 import swagger from '@elysiajs/swagger'
 import { usersModule } from './modules/users'
@@ -14,6 +15,7 @@ const app = new Elysia()
 	.use(jwtMiddleware)
 	.use(authModule)
 	.use(usersModule)
+	.use(friendsModule)
 	.listen(process.env.PORT!)
 
 console.log(
