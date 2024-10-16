@@ -1,4 +1,4 @@
-import type { AuthenticatedUser } from '../domain/entities/AuthenticatedUser'
+import type { AuthenticatedUser } from '../../domain/entities/AuthenticatedUser'
 import { httpClientBack } from './httpClientBack'
 
 export const loginBack = async (username: string, password: string): Promise<string> => {

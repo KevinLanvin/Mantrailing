@@ -1,4 +1,4 @@
-import { getPendingInvitationsBack } from '../../../infrastructure/user'
+import { getPendingInvitationsBack } from '../../../infrastructure/httpClient/user'
 import { pendingInvitations } from '../../../stores/userStore'
 
 export const getPendingInvitations = async () => {

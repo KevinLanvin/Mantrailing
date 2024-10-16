@@ -1,4 +1,4 @@
-import type { Friend } from '../domain/entities/Friend'
+import type { Friend } from '../../domain/entities/Friend'
 import { httpClientBack } from './httpClientBack'
 
 export const getFriendsBack = async (): Promise<Friend[]> => {

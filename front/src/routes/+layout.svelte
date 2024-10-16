@@ -3,9 +3,17 @@
 	import { token, user } from '../stores/loginStore'
 	import { goto } from '$app/navigation'
 	import { publicRoutes } from '$lib/publicRoutes'
-	import { getUser } from '../infrastructure/login'
+	import { getUser } from '../infrastructure/httpClient/login'
+	import { openWebSocket } from '../infrastructure/webSockets'
 
 	onMount(() => {
+		registerServiceWorker()
+		loadLocalStorage()
+		login()
+		openWebSocket()
+	})
+
+	const registerServiceWorker = () => {
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker
 				.register('/service-worker.js')
@@ -17,9 +25,9 @@
 					console.error('Service Worker registration failed:', error)
 				})
 		}
+	}
 
-		// Retrieve from local storage
-		const currentPage = window.location.pathname
+	const loadLocalStorage = () => {
 		const localStorageUser = localStorage.getItem('user')
 		const localStorageToken = localStorage.getItem('token')
 		if (!$user && localStorageUser) {
@@ -28,7 +36,10 @@
 		if (!$token && localStorageToken) {
 			token.set(localStorageToken)
 		}
+	}
 
+	const login = () => {
+		const currentPage = window.location.pathname
 		if (!publicRoutes.includes(currentPage) && !$user) {
 			if (!$token) {
 				goto('/login')
@@ -36,7 +47,7 @@
 				getUser()
 			}
 		}
-	})
+	}
 </script>
 
 <slot />

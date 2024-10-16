@@ -1,4 +1,4 @@
-import { getUser, loginBack } from '../../infrastructure/login'
+import { getUser, loginBack } from '../../infrastructure/httpClient/login'
 import { token, user } from '../../stores/loginStore'
 
 import { UnauthorizedError } from '../errors/Unauthorized'

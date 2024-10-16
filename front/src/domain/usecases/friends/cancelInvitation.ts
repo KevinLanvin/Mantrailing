@@ -1,4 +1,4 @@
-import { cancelInvitationBack } from '../../../infrastructure/user'
+import { cancelInvitationBack } from '../../../infrastructure/httpClient/user'
 import { getReceivedInvitations } from './getReceivedInvitations'
 
 export const cancelInvitation = async (friendId: string) => {

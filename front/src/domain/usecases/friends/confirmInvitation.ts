@@ -1,4 +1,4 @@
-import { confirmInvitationBack } from '../../../infrastructure/user'
+import { confirmInvitationBack } from '../../../infrastructure/httpClient/user'
 import { getFriends } from './getFriends'
 import { getReceivedInvitations } from './getReceivedInvitations'
 
