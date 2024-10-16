@@ -2,6 +2,7 @@ import Elysia, { t } from 'elysia'
 
 import { FriendshipsTable } from './database'
 import { UsersTable } from '../users/database'
+import { WebSocketHandler } from '../websocket/WebSocketHandler'
 import { authorization } from '../../libs/handlers/authorization'
 import { cancelInvitation } from './cancelInvitation'
 import { confirmInvitation } from './confirmInvitation'
@@ -19,15 +20,22 @@ export const friendsModule = new Elysia({ prefix: '/friends' })
 	.decorate({
 		userDbClient: new UsersTable(db),
 		friendshipDbClient: new FriendshipsTable(db),
+		webSocketHandler: WebSocketHandler.getInstance(),
 	})
 	.get('', ({ user, friendshipDbClient }) => {
 		return getFriends({ friendshipDbClient }, { userId: user.id as string })
 	})
 	.post(
 		'',
-		({ user, userDbClient, friendshipDbClient, body: { friendId } }) => {
+		({
+			user,
+			userDbClient,
+			friendshipDbClient,
+			webSocketHandler,
+			body: { friendId },
+		}) => {
 			return sendFriendInvitation(
-				{ userDbClient, friendshipDbClient },
+				{ userDbClient, friendshipDbClient, webSocketHandler },
 				{ sender: user.id as string, invited: friendId },
 			)
 		},

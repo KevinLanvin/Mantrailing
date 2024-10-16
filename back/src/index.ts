@@ -6,6 +6,7 @@ import { friendsModule } from './modules/friends'
 import { jwtMiddleware } from './libs/handlers/jwt'
 import swagger from '@elysiajs/swagger'
 import { usersModule } from './modules/users'
+import { webSocketModule } from './modules/websocket'
 
 const app = new Elysia()
 	.get('', 'Hello')
@@ -14,6 +15,7 @@ const app = new Elysia()
 	.use(errorModule)
 	.use(jwtMiddleware)
 	.use(authModule)
+	.use(webSocketModule)
 	.use(usersModule)
 	.use(friendsModule)
 	.listen(process.env.PORT!)
