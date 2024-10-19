@@ -1,6 +1,7 @@
 import { pgTable, text } from 'drizzle-orm/pg-core'
 
 import { createId } from '@paralleldrive/cuid2'
+import { dogsTable } from './dogs'
 import { friendshipsTable } from './friends'
 import { relations } from 'drizzle-orm'
 
@@ -14,6 +15,7 @@ export const usersTable = pgTable('users', {
 
 export const usersRelations = relations(usersTable, ({ many }) => ({
 	friends: many(friendshipsTable),
+	dogs: many(dogsTable),
 }))
 
 export type UserEntity = typeof usersTable.$inferSelect

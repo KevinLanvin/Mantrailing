@@ -8,17 +8,28 @@
 	import { confirmInvitation } from '../../domain/usecases/friends/confirmInvitation'
 	import { cancelInvitation } from '../../domain/usecases/friends/cancelInvitation'
 	import { deleteFriend } from '../../domain/usecases/friends/deleteFriend'
+	import { getDogs } from '../../domain/usecases/dogs/getDogs'
+	import { dogs } from '../../stores/dogStore'
+	import { deleteDog } from '../../domain/usecases/dogs/deleteDog'
+	import { createDog } from '../../domain/usecases/dogs/createDog'
 
 	onMount(() => {
 		getFriends()
 		getPendingInvitations()
 		getReceivedInvitations()
+		getDogs()
 	})
 
 	let searchedFriend: string
+	let dogName: string
 	const sendFriendInvitation = () => {
 		sendFriendInvitationTo(searchedFriend)
 		searchedFriend = ''
+	}
+
+	const handleNewDogSubmit = () => {
+		createDog(dogName)
+		dogName = ''
 	}
 
 	const handleConfirmInvitation = (friendId: string) => {
@@ -32,9 +43,13 @@
 	const handleDeleteFriend = (friendId: string) => {
 		deleteFriend(friendId)
 	}
+
+	const handleDeleteDog = (dogId: string) => {
+		deleteDog(dogId)
+	}
 </script>
 
-<h3>Friends</h3>
+<h3>Amis</h3>
 <ul>
 	{#each $friends as friend}
 		<li>
@@ -42,12 +57,12 @@
 		</li>
 	{/each}
 </ul>
-<h3>Ajouter un ami</h3>
+<h4>Ajouter un ami</h4>
 <form action="" on:submit={sendFriendInvitation}>
 	<input type="text" name="friendId" id="friendId" bind:value={searchedFriend} />
 	<button type="submit">Ajouter un ami</button>
 </form>
-<h3>Demandes en attente</h3>
+<h4>Demandes en attente</h4>
 <ul>
 	{#each $pendingInvitations as invitation}
 		<li>
@@ -55,7 +70,7 @@
 		</li>
 	{/each}
 </ul>
-<h3>Demandes reçues</h3>
+<h4>Demandes reçues</h4>
 <ul>
 	{#each $receivedInvitations as invitation}
 		<li>
@@ -66,3 +81,14 @@
 		</li>
 	{/each}
 </ul>
+<h3>Chiens</h3>
+<ul>
+	{#each $dogs as dog}
+		<li>{dog.name} <button on:click={() => handleDeleteDog(dog.id)}>Supprimer</button></li>
+	{/each}
+</ul>
+<h4>Ajouter un chien</h4>
+<form action="" on:submit={handleNewDogSubmit}>
+	<input type="text" name="dogName" bind:value={dogName} />
+	<button type="submit">Ajouter un chien</button>
+</form>
