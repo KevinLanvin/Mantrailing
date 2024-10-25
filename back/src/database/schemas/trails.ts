@@ -1,6 +1,7 @@
 import { json, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
 import { createId } from '@paralleldrive/cuid2'
+import { relations } from 'drizzle-orm'
 
 export const trailsTable = pgTable('trails', {
 	id: text('id').primaryKey().$defaultFn(createId),

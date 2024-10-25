@@ -8,6 +8,13 @@
       "when": 1729355667103,
       "tag": "0000_smart_king_bedlam",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1729897222939,
+      "tag": "0001_shocking_the_stranger",
+      "breakpoints": true
     }
   ]
 }

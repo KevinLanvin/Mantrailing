@@ -23,10 +23,12 @@ export const friendshipsRelations = relations(friendshipsTable, ({ one }) => ({
 	sender: one(usersTable, {
 		fields: [friendshipsTable.sender],
 		references: [usersTable.id],
+		relationName: 'sender',
 	}),
 	invited: one(usersTable, {
 		fields: [friendshipsTable.invited],
 		references: [usersTable.id],
+		relationName: 'invited',
 	}),
 }))
 

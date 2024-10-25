@@ -1,0 +1,80 @@
+table dogs {
+  id text [pk, not null]
+  name text [not null]
+  humanId text [not null]
+}
+
+table friendships {
+  senderId text [not null]
+  invitedId text [not null]
+  confirmed boolean
+
+  indexes {
+    (senderId, invitedId) [pk]
+  }
+}
+
+table searches {
+  id text [pk, not null]
+  dogId text
+  runnerId text
+  preparedTrailId text
+  runnerTrailId text
+  dogTrailId text
+  sessionId text
+}
+
+table sessionParticipations {
+  userId text [not null]
+  sessionId text [not null]
+  confirmed boolean
+
+  indexes {
+    (userId, sessionId) [pk]
+  }
+}
+
+table sessions {
+  id text [pk, not null]
+  date date [not null]
+  createdBy text
+}
+
+table trails {
+  id text [pk, not null]
+  path json [not null]
+  startTimestamp "timestamp with time zone"
+  endTimestamp "timestamp with time zone"
+}
+
+table users {
+  id text [pk, not null]
+  username text [not null, unique]
+  password text [not null]
+  email text [not null, unique]
+  authorizationKey text
+}
+
+ref: dogs.humanId > users.id
+
+ref: friendships.senderId - users.id
+
+ref: friendships.invitedId - users.id
+
+ref: searches.dogId > dogs.id
+
+ref: searches.runnerId - users.id
+
+ref: searches.preparedTrailId - trails.id
+
+ref: searches.runnerTrailId - trails.id
+
+ref: searches.dogTrailId - trails.id
+
+ref: searches.sessionId > sessions.id
+
+ref: sessionParticipations.userId > users.id
+
+ref: sessionParticipations.sessionId > sessions.id
+
+ref: sessions.createdBy > users.id

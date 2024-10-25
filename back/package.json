@@ -26,8 +26,10 @@
 	},
 	"devDependencies": {
 		"bun-types": "latest",
+		"drizzle-dbml-generator": "^0.9.0",
 		"drizzle-kit": "^0.24.2",
-		"react-email": "^3.0.1"
+		"react-email": "^3.0.1",
+		"tsx": "^4.19.1"
 	},
 	"module": "src/index.js"
 }

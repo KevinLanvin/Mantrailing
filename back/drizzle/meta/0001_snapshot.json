@@ -1,0 +1,446 @@
+{
+  "id": "bbe3cd10-aa2f-4f08-9e95-d14704054af8",
+  "prevId": "d5df0408-0061-49b7-9187-19a3b244e9f7",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.dogs": {
+      "name": "dogs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "humanId": {
+          "name": "humanId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "dogs_humanId_users_id_fk": {
+          "name": "dogs_humanId_users_id_fk",
+          "tableFrom": "dogs",
+          "tableTo": "users",
+          "columnsFrom": [
+            "humanId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.friendships": {
+      "name": "friendships",
+      "schema": "",
+      "columns": {
+        "senderId": {
+          "name": "senderId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "invitedId": {
+          "name": "invitedId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "confirmed": {
+          "name": "confirmed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "friendships_senderId_users_id_fk": {
+          "name": "friendships_senderId_users_id_fk",
+          "tableFrom": "friendships",
+          "tableTo": "users",
+          "columnsFrom": [
+            "senderId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "friendships_invitedId_users_id_fk": {
+          "name": "friendships_invitedId_users_id_fk",
+          "tableFrom": "friendships",
+          "tableTo": "users",
+          "columnsFrom": [
+            "invitedId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "friendships_senderId_invitedId_pk": {
+          "name": "friendships_senderId_invitedId_pk",
+          "columns": [
+            "senderId",
+            "invitedId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.searches": {
+      "name": "searches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "dogId": {
+          "name": "dogId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runnerId": {
+          "name": "runnerId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preparedTrailId": {
+          "name": "preparedTrailId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runnerTrailId": {
+          "name": "runnerTrailId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dogTrailId": {
+          "name": "dogTrailId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sessionId": {
+          "name": "sessionId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "searches_dogId_dogs_id_fk": {
+          "name": "searches_dogId_dogs_id_fk",
+          "tableFrom": "searches",
+          "tableTo": "dogs",
+          "columnsFrom": [
+            "dogId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "searches_runnerId_users_id_fk": {
+          "name": "searches_runnerId_users_id_fk",
+          "tableFrom": "searches",
+          "tableTo": "users",
+          "columnsFrom": [
+            "runnerId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "searches_preparedTrailId_trails_id_fk": {
+          "name": "searches_preparedTrailId_trails_id_fk",
+          "tableFrom": "searches",
+          "tableTo": "trails",
+          "columnsFrom": [
+            "preparedTrailId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "searches_runnerTrailId_trails_id_fk": {
+          "name": "searches_runnerTrailId_trails_id_fk",
+          "tableFrom": "searches",
+          "tableTo": "trails",
+          "columnsFrom": [
+            "runnerTrailId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "searches_dogTrailId_trails_id_fk": {
+          "name": "searches_dogTrailId_trails_id_fk",
+          "tableFrom": "searches",
+          "tableTo": "trails",
+          "columnsFrom": [
+            "dogTrailId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "searches_sessionId_sessions_id_fk": {
+          "name": "searches_sessionId_sessions_id_fk",
+          "tableFrom": "searches",
+          "tableTo": "sessions",
+          "columnsFrom": [
+            "sessionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.sessionParticipations": {
+      "name": "sessionParticipations",
+      "schema": "",
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sessionId": {
+          "name": "sessionId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "confirmed": {
+          "name": "confirmed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sessionParticipations_userId_users_id_fk": {
+          "name": "sessionParticipations_userId_users_id_fk",
+          "tableFrom": "sessionParticipations",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "sessionParticipations_sessionId_sessions_id_fk": {
+          "name": "sessionParticipations_sessionId_sessions_id_fk",
+          "tableFrom": "sessionParticipations",
+          "tableTo": "sessions",
+          "columnsFrom": [
+            "sessionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sessionParticipations_userId_sessionId_pk": {
+          "name": "sessionParticipations_userId_sessionId_pk",
+          "columns": [
+            "userId",
+            "sessionId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.sessions": {
+      "name": "sessions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sessions_createdBy_users_id_fk": {
+          "name": "sessions_createdBy_users_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "createdBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.trails": {
+      "name": "trails",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "startTimestamp": {
+          "name": "startTimestamp",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "endTimestamp": {
+          "name": "endTimestamp",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "authorizationKey": {
+          "name": "authorizationKey",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_username_unique": {
+          "name": "users_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        },
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
