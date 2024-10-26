@@ -1,3 +1,4 @@
+import { CannotCreateUser } from '../../errors/errors'
 import { UsersTable } from './database'
 
 export const createUser = async (
@@ -8,9 +9,13 @@ export const createUser = async (
 		email,
 	}: { username: string; password: string; email: string },
 ) => {
-	return await userDbClient.create({
-		username,
-		email,
-		password: await Bun.password.hash(password),
-	})
+	try {
+		return await userDbClient.create({
+			username,
+			email,
+			password: await Bun.password.hash(password),
+		})
+	} catch (error) {
+		throw new CannotCreateUser('Cet utilisateur existe déjà')
+	}
 }

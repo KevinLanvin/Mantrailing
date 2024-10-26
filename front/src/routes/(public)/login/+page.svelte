@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { login } from '../../domain/usecases/login'
+	import { login } from '../../../domain/usecases/login'
 
 	let username = ''
 	let password = ''
@@ -30,6 +30,7 @@
 				bind:value={password}
 			/>
 		</div>
+		<a href="/signup">S'inscrire</a>
 		<button type="submit">Connexion</button>
 	</form>
 </div>

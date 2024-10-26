@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { token, user } from '../stores/loginStore'
+	import { token, user } from '../../stores/loginStore'
 	import { goto } from '$app/navigation'
 	import { publicRoutes } from '$lib/publicRoutes'
-	import { getUser } from '../infrastructure/httpClient/login'
-	import { openWebSocket } from '../infrastructure/webSockets'
+	import { getUser } from '../../infrastructure/httpClient/login'
+	import { openWebSocket } from '../../infrastructure/webSockets'
 
 	onMount(() => {
 		registerServiceWorker()

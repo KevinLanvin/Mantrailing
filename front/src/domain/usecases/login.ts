@@ -3,6 +3,7 @@ import { token, user } from '../../stores/loginStore'
 
 import { UnauthorizedError } from '../errors/Unauthorized'
 import { goto } from '$app/navigation'
+import { signupBack } from '../../infrastructure/httpClient/user'
 
 export const login = async (username: string, password: string) => {
 	try {
@@ -37,4 +38,13 @@ export const disconnect = () => {
 	user.set(null)
 	localStorage.clear()
 	goto('/login')
+}
+
+export const signup = async (username: string, email: string, password: string) => {
+	try {
+		await signupBack(username, email, password)
+		await login(username, password)
+	} catch (error) {
+		goto('/signup')
+	}
 }

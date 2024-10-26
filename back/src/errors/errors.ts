@@ -3,6 +3,7 @@ export enum errorCode {
 	INVITATION_ALREADY_EXISTS = 'INVITATION_ALREADY_EXISTS',
 	CANNOT_FIND_INVITATION = 'CANNOT_FIND_INVITATION',
 	CANNOT_FIND_USER = 'CANNOT_FIND_USER',
+	CANNOT_CREATE_USER = 'CANNOT_CREATE_USER',
 }
 
 export class CannotInviteYourselfError extends Error {
@@ -28,3 +29,5 @@ export class CannotFindUser extends Error {
 		super(`Cannot find user ${user}`)
 	}
 }
+
+export class CannotCreateUser extends Error {}

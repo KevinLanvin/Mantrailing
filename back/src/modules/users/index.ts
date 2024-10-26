@@ -5,10 +5,8 @@ import { UsersTable } from './database'
 import { authorization } from '../../libs/handlers/authorization'
 import { createUser } from './createUser'
 import { db } from '../../libs/database'
-import { logger } from '@bogeychan/elysia-logger'
 
 export const usersModule = new Elysia({ prefix: '/users' })
-	.use(logger())
 	// .use(emailSender)
 	.decorate({
 		userDbClient: new UsersTable(db),
@@ -19,18 +17,9 @@ export const usersModule = new Elysia({ prefix: '/users' })
 	})
 	.post(
 		'',
-		async ({ log, userDbClient, body, set }) => {
-			try {
-				log.info('Create user')
-				createUser({ userDbClient }, body)
-				set.status = 201
-			} catch (error) {
-				log.error(error)
-				set.status = 409
-				throw new Error('An error occured while create your account', {
-					cause: error.message,
-				})
-			}
+		async ({ userDbClient, body, set }) => {
+			await createUser({ userDbClient }, body)
+			set.status = 201
 		},
 		{
 			body: t.Object({

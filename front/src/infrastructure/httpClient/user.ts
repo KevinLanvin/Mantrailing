@@ -28,3 +28,15 @@ export const cancelInvitationBack = async (friendId: string): Promise<void> => {
 export const deleteFriendBack = async (friendId: string): Promise<void> => {
 	await httpClientBack.delete(`/friends/${friendId}`)
 }
+
+export const signupBack = async (
+	username: string,
+	email: string,
+	password: string
+): Promise<void> => {
+	return httpClientBack.post('users', {
+		username,
+		email,
+		password
+	})
+}

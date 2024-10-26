@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { disconnect } from '../domain/usecases/login'
-	import { user } from '../stores/loginStore'
+	import { disconnect } from '../../domain/usecases/login'
+	import { user } from '../../stores/loginStore'
 
 	const handleDisconnect = () => {
 		disconnect()
