@@ -31,7 +31,7 @@
 				id="moistureWet"
 				name="moisture"
 				value="wet"
-				on:change={handleMoistureChange}
+				onchange={handleMoistureChange}
 			/>
 			<label for="moistureWet">Humide</label>
 		</div>
@@ -41,7 +41,7 @@
 				id="moistureDry"
 				name="moisture"
 				value="dry"
-				on:change={handleMoistureChange}
+				onchange={handleMoistureChange}
 			/>
 			<label for="moistureDry">Sec</label>
 		</div>
@@ -51,7 +51,7 @@
 				id="moistureWarm"
 				name="moisture"
 				value="warm"
-				on:change={handleMoistureChange}
+				onchange={handleMoistureChange}
 			/>
 			<label for="moistureWarm">Désertique</label>
 		</div>

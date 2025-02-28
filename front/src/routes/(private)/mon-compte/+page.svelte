@@ -20,8 +20,8 @@
 		getDogs()
 	})
 
-	let searchedFriend: string
-	let dogName: string
+	let searchedFriend: string = $state()
+	let dogName: string = $state()
 	const sendFriendInvitation = () => {
 		sendFriendInvitationTo(searchedFriend)
 		searchedFriend = ''
@@ -53,12 +53,12 @@
 <ul>
 	{#each $friends as friend}
 		<li>
-			{friend.username} <button on:click={() => handleDeleteFriend(friend.id)}>Supprimer</button>
+			{friend.username} <button onclick={() => handleDeleteFriend(friend.id)}>Supprimer</button>
 		</li>
 	{/each}
 </ul>
 <h4>Ajouter un ami</h4>
-<form action="" on:submit={sendFriendInvitation}>
+<form action="" onsubmit={sendFriendInvitation}>
 	<input type="text" name="friendId" id="friendId" bind:value={searchedFriend} />
 	<button type="submit">Ajouter un ami</button>
 </form>
@@ -75,8 +75,8 @@
 	{#each $receivedInvitations as invitation}
 		<li>
 			{invitation.username}
-			<button on:click={() => handleConfirmInvitation(invitation.id)}>Accepter</button><button
-				on:click={() => handleCancelInvitation(invitation.id)}>Refuser</button
+			<button onclick={() => handleConfirmInvitation(invitation.id)}>Accepter</button><button
+				onclick={() => handleCancelInvitation(invitation.id)}>Refuser</button
 			>
 		</li>
 	{/each}
@@ -84,11 +84,11 @@
 <h3>Chiens</h3>
 <ul>
 	{#each $dogs as dog}
-		<li>{dog.name} <button on:click={() => handleDeleteDog(dog.id)}>Supprimer</button></li>
+		<li>{dog.name} <button onclick={() => handleDeleteDog(dog.id)}>Supprimer</button></li>
 	{/each}
 </ul>
 <h4>Ajouter un chien</h4>
-<form action="" on:submit={handleNewDogSubmit}>
+<form action="" onsubmit={handleNewDogSubmit}>
 	<input type="text" name="dogName" bind:value={dogName} />
 	<button type="submit">Ajouter un chien</button>
 </form>

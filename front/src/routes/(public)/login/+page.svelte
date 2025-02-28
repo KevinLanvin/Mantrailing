@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { login } from '../../../domain/usecases/login'
 
-	let username = ''
-	let password = ''
+	let username = $state('')
+	let password = $state('')
 	const handleSubmit = () => {
 		login(username, password)
 	}
@@ -13,7 +13,7 @@
 		<img src="/illu.jpg" alt="Chien reniflant une trace" class="illu" />
 	</div>
 
-	<form action="" on:submit={handleSubmit} class="loginForm">
+	<form action="" onsubmit={handleSubmit} class="loginForm">
 		<h1>Mantrailing<br /><span class="mini">App</span></h1>
 		<div class="formGroup">
 			<label for="username">Nom d'utilisateur</label>

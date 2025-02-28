@@ -31,7 +31,7 @@
 				id="windDirectionFront"
 				name="windDirection"
 				value="front"
-				on:change={handleWindDirectionChange}
+				onchange={handleWindDirectionChange}
 			/>
 			<label for="windDirectionFront">De face</label>
 		</div>
@@ -41,7 +41,7 @@
 				id="windDirectionSide"
 				name="windDirection"
 				value="side"
-				on:change={handleWindDirectionChange}
+				onchange={handleWindDirectionChange}
 			/>
 			<label for="windDirectionSide">De côté</label>
 		</div>
@@ -51,7 +51,7 @@
 				id="windDirectionBack"
 				name="windDirection"
 				value="back"
-				on:change={handleWindDirectionChange}
+				onchange={handleWindDirectionChange}
 			/>
 			<label for="windDirectionBack">De dos</label>
 		</div>

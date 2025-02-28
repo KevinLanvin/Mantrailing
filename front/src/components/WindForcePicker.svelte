@@ -31,7 +31,7 @@
 		name="windForce"
 		min="0"
 		max="100"
-		on:change={handleWindForceChange}
+		onchange={handleWindForceChange}
 		value="0"
 		list="availableWindForces"
 	/>

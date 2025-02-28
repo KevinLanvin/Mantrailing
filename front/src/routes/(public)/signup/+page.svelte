@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { signup } from '../../../domain/usecases/login'
 
-	let username = ''
-	let password = ''
-	let email = ''
+	let username = $state('')
+	let password = $state('')
+	let email = $state('')
 
 	const handleSubmit = () => {
 		signup(username, email, password)
@@ -11,7 +11,7 @@
 </script>
 
 <div class="signupContainer">
-	<form action="" on:submit={handleSubmit} class="signupForm">
+	<form action="" onsubmit={handleSubmit} class="signupForm">
 		<div class="formGroup">
 			<label for="username">Nom d'utilisateur</label>
 			<input

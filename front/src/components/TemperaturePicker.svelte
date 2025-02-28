@@ -32,7 +32,7 @@
 		min="-10"
 		max="30"
 		value="15"
-		on:change={handleTemperatureChange}
+		onchange={handleTemperatureChange}
 		list="availableTemperatures"
 	/>
 	<datalist id="availableTemperatures">

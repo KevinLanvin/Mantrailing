@@ -11,7 +11,7 @@
 <div>{$user?.id}</div>
 <div>{$user?.email}</div>
 <div>{$user?.username}</div>
-<button on:click={handleDisconnect}>Déconnexion</button>
+<button onclick={handleDisconnect}>Déconnexion</button>
 <div class="actionBar"><a href="/mon-compte">Mon compte</a></div>
 
 <style lang="scss">

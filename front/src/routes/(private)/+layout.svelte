@@ -5,6 +5,11 @@
 	import { publicRoutes } from '$lib/publicRoutes'
 	import { getUser } from '../../infrastructure/httpClient/login'
 	import { openWebSocket } from '../../infrastructure/webSockets'
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	onMount(() => {
 		registerServiceWorker()
@@ -50,7 +55,7 @@
 	}
 </script>
 
-<slot />
+{@render children?.()}
 
 <style lang="scss">
 </style>

@@ -3,7 +3,7 @@
 	import { currentCoordinates, deletedTurns, path } from '../stores/pathStore'
 
 	let watcher: number
-	let tracking = false
+	let tracking = $state(false)
 
 	const handleTrackingEvent = () => {
 		tracking = !tracking
@@ -59,6 +59,6 @@
 </script>
 
 <h2>Coordonnées {$currentCoordinates.latitude}, {$currentCoordinates.longitude}</h2>
-<button on:click={handleTrackingEvent}
+<button onclick={handleTrackingEvent}
 	>{#if !tracking}Démarrer la trace{:else}Arrêter la trace{/if}</button
 >

@@ -167,9 +167,9 @@
 	watch(deletedTurns, reloadMarkers)
 </script>
 
-<svelte:window on:resize={resizeMap} />
+<svelte:window onresize={resizeMap} />
 
-<div class="map" use:mapAction />
+<div class="map" use:mapAction></div>
 
 <style lang="scss">
 	.map {
