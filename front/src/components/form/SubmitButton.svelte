@@ -9,7 +9,7 @@
 
   .submit-button {
     background-color: $main-color-1;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     font-family: 'REM';
     width: 100%;
     border: none;

@@ -78,12 +78,12 @@ import TextInput from '../../../components/form/TextInput.svelte'
 		background-color: $neutral-color-dark;
 		position: relative;
 		position: relative;
-		padding: 0 2rem 2rem 2rem;
+		padding: 0 $gutter 4rem $gutter;
 		z-index: 10;
 		&::before {
 			content: url('round.svg');
 			position: absolute;
-			bottom: 100%;
+			bottom: calc(100% - 1px);
 			left: 0;
 			width: 100%;
 			z-index: -1;
