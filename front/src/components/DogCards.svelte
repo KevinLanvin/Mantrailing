@@ -3,9 +3,7 @@
 	import { dogs } from '../stores/dogStore'
 	import { getDogs } from '../domain/usecases/dogs/getDogs'
 	import AddIcon from '../assets/icons/Add.svelte'
-	import { goto } from '$app/navigation'
 	onMount(getDogs)
-	const addDog = () => goto('/mon-compte')
 </script>
 
 <div class="dog-cards">
@@ -17,10 +15,10 @@
 			{/each}
 		</div>
 	{:else}
-		<button class="add-dog" on:click={addDog}>
+		<a class="add-dog" href="/mon-compte">
 			<AddIcon width="4rem" />
 			<p>Tu n'as pas encore ajouté de chien à ton profil !</p>
-    </button>
+    </a>
 	{/if}
 </div>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import DogCards from '../../components/DogCards.svelte'
 import HomeHeader from '../../components/HomeHeader.svelte'
+	import Menu from '../../components/Menu.svelte'
 import { disconnect } from '../../domain/usecases/login'
 	import { user } from '../../stores/loginStore'
 
@@ -18,7 +19,8 @@ import { disconnect } from '../../domain/usecases/login'
 	<div>{$user?.username}</div>
 	<button onclick={handleDisconnect}>Déconnexion</button>
 </main>
-<div class="actionBar"><a href="/mon-compte">Mon compte</a></div>
+<Menu />
+<!-- <div class="actionBar"><a href="/mon-compte">Mon compte</a></div> -->
 
 <style lang="scss">
 	@import '../../assets/styles/vars';
