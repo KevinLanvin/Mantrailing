@@ -19,9 +19,14 @@ httpClientBack.interceptors.request.use((config) => {
 	return config
 })
 
-httpClientBack.interceptors.response.use((response) => {
-	if (response.status === 403 || response.status === 401) {
-		disconnect()
+httpClientBack.interceptors.response.use(
+	(response) => {
+		return Promise.resolve(response)
+	},
+	(error) => {
+		if (error.status === 403 || error.status === 401) {
+			disconnect()
+		}
+		return error
 	}
-	return response
-})
+)

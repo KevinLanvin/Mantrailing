@@ -1,4 +1,4 @@
-import Elysia, { NotFoundError, t } from 'elysia'
+import Elysia, { NotFoundError, error, t } from 'elysia'
 
 import { UsersTable } from '../users/database'
 import { addDays } from 'date-fns'
@@ -14,11 +14,10 @@ export const authModule = new Elysia({ prefix: '/auth' })
 	.decorate({ userDbClient: new UsersTable(db) })
 	.post(
 		'',
-		async ({ jwt, body, set, cookie: { auth }, userDbClient }) => {
+		async ({ jwt, body, cookie: { auth }, userDbClient }) => {
 			const user = await userDbClient.getAuthUser({ ...body })
 			if (!user) {
-				set.status = 404
-				throw new NotFoundError('User not found')
+				return error(404, 'User not found')
 			}
 			auth.set({
 				value: await jwt.sign(user),

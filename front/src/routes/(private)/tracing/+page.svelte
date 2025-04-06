@@ -5,6 +5,7 @@
 	import { currentCoordinates, path } from '../../../stores/pathStore'
 	import fakePath from '../../../track.json'
 	import 'iconify-icon'
+	import Geoloc from '../../../components/Geoloc.svelte'
 
 	onMount(() => {
 		setTimeout(() => {
@@ -15,5 +16,5 @@
 </script>
 
 <Map />
-<!-- <Geoloc /> -->
+<Geoloc />
 <Score />

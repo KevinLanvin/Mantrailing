@@ -58,7 +58,17 @@
 	)
 </script>
 
-<h2>Coordonnées {$currentCoordinates.latitude}, {$currentCoordinates.longitude}</h2>
-<button onclick={handleTrackingEvent}
+<div class="actions">
+	<h2>Coordonnées {$currentCoordinates.latitude}, {$currentCoordinates.longitude}</h2>
+	<button onclick={handleTrackingEvent}
 	>{#if !tracking}Démarrer la trace{:else}Arrêter la trace{/if}</button
->
+	>
+</div>
+
+<style lang="scss">
+	.actions {
+		position: fixed;
+		bottom: 0;
+		z-index: 100;
+	}
+</style>
